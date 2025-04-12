@@ -1,0 +1,8 @@
+version: "3.1"
+rules:
+- rule: Set tone to casual
+  steps:
+  - intent: change_tone
+    entities:
+    - tone: casual
+    action: utter_tone_casual
