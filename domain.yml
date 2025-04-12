@@ -1,5 +1,4 @@
 version: "3.1"
-
 intents:
   - greet
   - goodbye
@@ -8,27 +7,26 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
-
+  - change_tone
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
-
+    - text: "Hey! How are you?"
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
+    - text: "Here is something to cheer you up!"
   utter_did_that_help:
-  - text: "Did that help you?"
-
+    - text: "Did that help you?"
   utter_happy:
-  - text: "Great, carry on!"
-
+    - text: "Great, carry on!"
   utter_goodbye:
-  - text: "Bye"
-
+    - text: "Bye"
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
+    - text: "I am a bot, powered by Rasa."
+  utter_tone_casual:
+    - text: "Alright, I'm switching to a chill, casual vibe!"
+  utter_tone_formal:
+    - text: "Very well, I shall adopt a formal tone henceforth."
+  utter_tone_friendly:
+    - text: "Yay, let's keep it super friendly and fun!"
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
