@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  h1 {
+    color: #333;
+    text-align: center;
+  }
+  #tone-selector {
+    text-align: center;
+    margin: 10px 0;
+  }
+  #chat-container {
+    width: 300px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  #webchat {
+    height: 300px;
+  }

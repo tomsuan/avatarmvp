@@ -4,10 +4,21 @@
   <meta charset="UTF-8">
   <title>Avatar MVP</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.min.js"></script>
 </head>
 <body>
-  <h1>My AI Avatar</h1>
-  <div id="chatbot"></div>
+  <h1>Hello, this is my AI Avatar project!</h1>
+  <div id="tone-selector">
+    <label for="tone">Choose a tone:</label>
+    <select id="tone">
+      <option value="casual">Casual</option>
+      <option value="formal">Formal</option>
+      <option value="friendly">Friendly</option>
+    </select>
+  </div>
+  <div id="chat-container">
+    <div id="webchat"></div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
