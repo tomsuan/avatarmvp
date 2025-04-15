@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar Creation Survey</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; }
+        label { display: block; margin-top: 10px; }
+        input, textarea { width: 100%; padding: 5px; margin-top: 5px; }
+        button { padding: 10px 20px; margin-top: 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Create Your Avatar</h1>
+    <h2>Self-Assessment Survey</h2>
+    <p>Tell us about yourself to shape your avatar.</p>
+    <form id="avatarForm" onsubmit="submitForm(event)">
+        <label for="interests">What are your favorite hobbies or interests?</label>
+        <textarea id="interests" name="interests" rows="3" placeholder="E.g., I love reading, hiking, and music."></textarea>
+        <label for="values">What values matter most to you?</label>
+        <textarea id="values" name="values" rows="3" placeholder="E.g., I value honesty, kindness, and creativity."></textarea>
+        <label for="personality">How would you describe your personality?</label>
+        <textarea id="personality" name="personality" rows="3" placeholder="E.g., I’m funny, thoughtful, and a bit shy."></textarea>
+
+        <h2>Social Media Input</h2>
+        <p>Add links to your social media profiles for a fuller picture.</p>
+        <label for="twitter">Twitter Profile URL (optional):</label>
+        <input type="text" id="twitter" name="twitter" placeholder="E.g., https://twitter.com/yourprofile">
+        <label for="instagram">Instagram Profile URL (optional):</label>
+        <input type="text" id="instagram" name="instagram" placeholder="E.g., https://instagram.com/yourprofile">
+        <button type="submit">Create Avatar</button>
+    </form>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            const form = document.getElementById('avatarForm');
+            const formData = new FormData(form);
+            const params = new URLSearchParams();
+            formData.forEach((value, key) => {
+                params.append(key, value);
+            });
+            window.location.href = `avatar-preview.html?${params.toString()}`;
+        }
+    </script>
+</body>
+</html>

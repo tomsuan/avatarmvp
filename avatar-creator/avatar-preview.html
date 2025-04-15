@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Avatar Preview</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; }
+        .avatar-box { border: 1px solid #ccc; padding: 20px; margin-top: 20px; background-color: #f9f9f9; }
+        button { padding: 10px 20px; margin-top: 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Your Avatar Preview</h1>
+    <p>Here’s a first look at your avatar, based on your survey and social media input.</p>
+    <div class="avatar-box">
+        <h2 id="avatarName">Avatar Name: [Your Avatar’s Name]</h2>
+        <p><strong>Traits:</strong></p>
+        <ul>
+            <li>Interest: <span id="interest">[Waiting for survey input]</span></li>
+            <li>Value: <span id="value">[Waiting for survey input]</span></li>
+            <li>Personality: <span id="personality">[Waiting for survey input]</span></li>
+            <li>Social Insight: <span id="socialInsight">[Waiting for social media input]</span></li>
+        </ul>
+    </div>
+    <button onclick="window.location.href='survey.html'">Go Back to Survey</button>
+
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                interests: params.get('interests') || '[Not provided]',
+                values: params.get('values') || '[Not provided]',
+                personality: params.get('personality') || '[Not provided]',
+                twitter: params.get('twitter') || '',
+                instagram: params.get('instagram') || ''
+            };
+        }
+
+        function generateAvatarName() {
+            const adjectives = ['Sunny', 'Wise', 'Calm', 'Joyful', 'Bright'];
+            const nouns = ['Star', 'River', 'Breeze', 'Flame', 'Echo'];
+            const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            return `${randomAdj} ${randomNoun}`;
+        }
+
+        function inferSocialInsight(twitter, instagram) {
+            if (twitter && instagram) return "Shares a mix of thoughts and visuals online";
+            if (twitter) return "Often shares thoughts and ideas online";
+            if (instagram) return "Frequently posts photos and experiences online";
+            return "[No social media provided]";
+        }
+
+        window.onload = function() {
+            const params = getQueryParams();
+            document.getElementById('avatarName').textContent = `Avatar Name: ${generateAvatarName()}`;
+            document.getElementById('interest').textContent = params.interests;
+            document.getElementById('value').textContent = params.values;
+            document.getElementById('personality').textContent = params.personality;
+            document.getElementById('socialInsight').textContent = inferSocialInsight(params.twitter, params.instagram);
+        };
+    </script>
+</body>
+</html>
