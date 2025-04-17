@@ -1,3 +1,6 @@
-models/
 .rasa/
-librdkafka/
+node_modules/
+avatar-creator/avatars.json
+.DS_Store
+.env
+*.log

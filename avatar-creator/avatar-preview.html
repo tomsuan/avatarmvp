@@ -25,6 +25,7 @@
         </ul>
     </div>
     <button onclick="window.location.href='survey.html'">Go Back to Survey</button>
+    <p><a href="avatar-meeting.html">View Avatar Meeting Place</a></p>
 
     <script>
         function getQueryParams() {
@@ -55,11 +56,25 @@
 
         window.onload = function() {
             const params = getQueryParams();
-            document.getElementById('avatarName').textContent = `Avatar Name: ${generateAvatarName()}`;
+            const avatarName = generateAvatarName();
+            document.getElementById('avatarName').textContent = `Avatar Name: ${avatarName}`;
             document.getElementById('interest').textContent = params.interests;
             document.getElementById('value').textContent = params.values;
             document.getElementById('personality').textContent = params.personality;
             document.getElementById('socialInsight').textContent = inferSocialInsight(params.twitter, params.instagram);
+
+            // Create avatar object
+            const avatar = {
+                name: avatarName,
+                interests: params.interests,
+                values: params.values,
+                personality: params.personality,
+                socialInsight: inferSocialInsight(params.twitter, params.instagram),
+                createdAt: new Date().toISOString()
+            };
+
+            // Simulate saving to avatars.json (manual step for now)
+            alert('Please download avatars.json, add the following avatar data, and upload it back:\n\n' + JSON.stringify(avatar, null, 2) + '\n\nThis step will be automated in a future version with a backend.');
         };
     </script>
 </body>

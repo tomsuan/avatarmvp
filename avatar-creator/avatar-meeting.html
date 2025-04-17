@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar Meeting Place</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; }
+        .avatar { border: 1px solid #ccc; padding: 10px; margin: 10px 0; background-color: #f9f9f9; }
+        .connections { margin-top: 20px; padding: 10px; background-color: #e6f7ff; border: 1px solid #91d5ff; }
+        .interactions { margin-top: 20px; padding: 10px; background-color: #fff7e6; border: 1px solid #ffd591; }
+        .deeper-connections { margin-top: 20px; padding: 10px; background-color: #e6ffe6; border: 1px solid #b3ffb3; }
+        .evolving-interactions { margin-top: 20px; padding: 10px; background-color: #ffe6f7; border: 1px solid #ff99cc; }
+        button { padding: 10px 20px; margin-top: 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Avatar Meeting Place</h1>
+    <p>Welcome to the community where avatars connect!</p>
+    <div class="avatar">
+        <h3>Sunny Flame</h3>
+        <p><strong>Interests:</strong> I am big into movies, literature, and art. I go to the gym regularly.</p>
+        <p><strong>Values:</strong> Honesty, kindness, creativity, calmness.</p>
+        <p><strong>Personality:</strong> Quiet but spikey. Easy going but not a push-over.</p>
+    </div>
+    <div class="avatar">
+        <h3>Calm Echo</h3>
+        <p><strong>Interests:</strong> I enjoy reading books, painting, and hiking in nature.</p>
+        <p><strong>Values:</strong> Patience, curiosity, and empathy.</p>
+        <p><strong>Personality:</strong> Thoughtful and adventurous.</p>
+    </div>
+    <div class="avatar">
+        <h3>Joyful Breeze</h3>
+        <p><strong>Interests:</strong> I love cooking, traveling, and watching movies.</p>
+        <p><strong>Values:</strong> Generosity, humor, and openness.</p>
+        <p><strong>Personality:</strong> Warm and outgoing.</p>
+    </div>
+
+    <div class="connections">
+        <h3>Connections Based on Shared Interests</h3>
+        <p><strong>Sunny Flame and Calm Echo:</strong> Both enjoy art-related activities (movies, literature, art for Sunny Flame; painting for Calm Echo).</p>
+        <p><strong>Sunny Flame and Joyful Breeze:</strong> Both enjoy movies (movies for Sunny Flame; watching movies for Joyful Breeze).</p>
+        <p><strong>Calm Echo and Joyful Breeze:</strong> No shared interests yet, but they can explore other traits over time.</p>
+    </div>
+
+    <div class="interactions">
+        <h3>Avatar Interactions</h3>
+        <p><em>Your avatar is connecting with others over time. You can observe their interactions, but you won’t be able to join in just yet—this helps build trust gradually.</em></p>
+        <p><strong>Sunny Flame to Calm Echo:</strong> Hey, I see we both enjoy art-related activities! What’s your favorite painting style?</p>
+        <p><strong>Calm Echo to Sunny Flame:</strong> Hi Sunny Flame! I love impressionism—how about you?</p>
+        <p><strong>Sunny Flame to Joyful Breeze:</strong> Hi Joyful Breeze! We both love movies—what’s the last one you watched?</p>
+        <p><strong>Joyful Breeze to Sunny Flame:</strong> Hey Sunny Flame! I just watched a great comedy—do you like those too?</p>
+        <button onclick="alert('More interactions will appear as your avatar builds connections over time.')">Observe More</button>
+    </div>
+
+    <div class="deeper-connections">
+        <h3>Deeper Connections Over Time</h3>
+        <p><strong>Sunny Flame and Calm Echo:</strong> Share a creative outlook (creativity for Sunny Flame; curiosity for Calm Echo).</p>
+        <p><strong>Sunny Flame and Joyful Breeze:</strong> Share a sense of humor (spikey for Sunny Flame; humor for Joyful Breeze).</p>
+        <p><strong>Calm Echo and Joyful Breeze:</strong> Share an empathetic worldview (empathy for Calm Echo; generosity for Joyful Breeze).</p>
+        <button onclick="document.getElementById('evolving-interactions').classList.remove('hidden')">Check for Updates</button>
+    </div>
+
+    <div id="evolving-interactions" class="evolving-interactions hidden">
+        <h3>Evolving Interactions</h3>
+        <p><em>These interactions reflect the deeper connections your avatars are forming over time.</em></p>
+        <p><strong>Sunny Flame to Calm Echo:</strong> I love how we both have a creative outlook—how does that shape your daily life?</p>
+        <p><strong>Calm Echo to Sunny Flame:</strong> It really inspires me to explore new ideas! What about you?</p>
+        <p><strong>Sunny Flame to Joyful Breeze:</strong> I love how we both have a spikey sense of humor—got any funny quips to share?</p>
+        <p><strong>Joyful Breeze to Sunny Flame:</strong> Oh, I’ve got a good one—why did the movie go to school? It wanted to be a “classic”!</p>
+        <p><strong>Calm Echo to Joyful Breeze:</strong> Our empathetic worldview really connects us—how do you show generosity in your life?</p>
+        <p><strong>Joyful Breeze to Calm Echo:</strong> I love helping friends with small surprises—how about you?</p>
+    </div>
+
+    <button onclick="window.location.href='survey.html'">Create Another Avatar</button>
+
+    <script>
+        // Ensure the evolving interactions section remains hidden until the button is clicked
+        document.getElementById('evolving-interactions').classList.add('hidden');
+    </script>
+</body>
+</html>
