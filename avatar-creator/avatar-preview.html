@@ -73,8 +73,26 @@
                 createdAt: new Date().toISOString()
             };
 
-            // Simulate saving to avatars.json (manual step for now)
-            alert('Please download avatars.json, add the following avatar data, and upload it back:\n\n' + JSON.stringify(avatar, null, 2) + '\n\nThis step will be automated in a future version with a backend.');
+            // Send avatar data to the backend
+            fetch('/api/avatars', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(avatar)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to save avatar');
+                return response.json();
+            })
+            .then(data => {
+                console.log('Avatar saved:', data);
+                alert('Avatar successfully saved! You can now view it in the Avatar Meeting Place.');
+            })
+            .catch(error => {
+                console.error('Error saving avatar:', error);
+                alert('Failed to save avatar. Please try again.');
+            });
         };
     </script>
 </body>

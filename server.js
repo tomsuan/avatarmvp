@@ -1,11 +1,14 @@
 const express = require('express');
-const fs = require('fs').promises;
-const path = require('path');
+const cors = require('cors');
+const { put, get, del } = require('@vercel/blob');
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Log all incoming requests for debugging
 app.use((req, res, next) => {
@@ -13,8 +16,13 @@ app.use((req, res, next) => {
     next();
 });
 
+// Handle favicon.ico requests
+app.get('/favicon.ico', (req, res) => {
+    res.status(204).end(); // 204 No Content
+});
+
 // Serve static files from the avatar-creator folder
-const staticPath = path.join(__dirname, 'avatar-creator');
+const staticPath = require('path').join(__dirname, 'avatar-creator');
 console.log(`Serving static files from: ${staticPath}`);
 app.use(express.static(staticPath));
 
@@ -24,23 +32,32 @@ app.get('/', (req, res) => {
     res.redirect('/survey.html');
 });
 
-// File to store avatars (temporary, will replace with a database later)
-const avatarsFile = path.join(__dirname, 'avatars-data.json');
+// Blob storage key for avatars
+const AVATARS_BLOB_KEY = 'avatars.json';
 
-// Initialize avatars file if it doesn't exist
-async function initializeAvatarsFile() {
+// Initialize avatars if not exists
+async function initializeAvatars() {
     try {
-        await fs.access(avatarsFile);
+        const { blob } = await get(AVATARS_BLOB_KEY);
+        if (!blob) {
+            await put(AVATARS_BLOB_KEY, JSON.stringify([]), { access: 'public' });
+        }
     } catch (error) {
-        await fs.writeFile(avatarsFile, JSON.stringify([]));
+        console.error('Error initializing avatars:', error);
+        await put(AVATARS_BLOB_KEY, JSON.stringify([]), { access: 'public' });
     }
 }
-initializeAvatarsFile();
+initializeAvatars();
 
 // API to get all avatars
 app.get('/api/avatars', async (req, res) => {
     try {
-        const avatars = await fs.readFile(avatarsFile, 'utf8');
+        const { blob } = await get(AVATARS_BLOB_KEY);
+        if (!blob) {
+            res.json([]);
+            return;
+        }
+        const avatars = await blob.text();
         res.json(JSON.parse(avatars));
     } catch (error) {
         console.error('Error loading avatars:', error);
@@ -52,9 +69,13 @@ app.get('/api/avatars', async (req, res) => {
 app.post('/api/avatars', async (req, res) => {
     try {
         const newAvatar = req.body;
-        const avatars = JSON.parse(await fs.readFile(avatarsFile, 'utf8'));
+        const { blob } = await get(AVATARS_BLOB_KEY);
+        let avatars = [];
+        if (blob) {
+            avatars = JSON.parse(await blob.text());
+        }
         avatars.push(newAvatar);
-        await fs.writeFile(avatarsFile, JSON.stringify(avatars, null, 2));
+        await put(AVATARS_BLOB_KEY, JSON.stringify(avatars), { access: 'public' });
         res.status(201).json(newAvatar);
     } catch (error) {
         console.error('Error saving avatar:', error);
