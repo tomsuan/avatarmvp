@@ -1,13 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to Avatar Creation</title>
-    <meta http-equiv="refresh" content="0;url=avatar-creator/survey.html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avatar Connection App</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.5/babel.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <p>Redirecting to the Avatar Creation Survey...</p>
-    <p>If you are not redirected, <a href="avatar-creator/survey.html">click here</a>.</p>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    const App = () => {
+      const [userData, setUserData] = useState({ name: '', interests: '' });
+      const [avatarMatch, setAvatarMatch] = useState(null);
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        // Simulate API call to save user data and match avatars
+        const response = await fetch('/api/match', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData),
+        });
+        const match = await response.json();
+        setAvatarMatch(match);
+      };
+
+      return (
+        <div className="p-6 max-w-lg mx-auto">
+          <h1 className="text-2xl font-bold mb-4">Create Your Avatar</h1>
+          <div className="mb-4">
+            <label className="block text-gray-700">Name:</label>
+            <input
+              type="text"
+              value={userData.name}
+              onChange={(e) => setUserData({ ...userData, name: e.target.value })}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Interests:</label>
+            <input
+              type="text"
+              value={userData.interests}
+              onChange={(e) => setUserData({ ...userData, interests: e.target.value })}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          <button onClick={handleSubmit} className="bg-blue-500 text-white p-2 rounded">
+            Create Avatar & Find Match
+          </button>
+          {avatarMatch && (
+            <div className="mt-4 p-4 bg-green-100 rounded">
+              <h2 className="text-xl">Match Found!</h2>
+              <p>Avatar: {avatarMatch.name}</p>
+              <p>Shared Interest: {avatarMatch.interests}</p>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
 </body>
 </html>
